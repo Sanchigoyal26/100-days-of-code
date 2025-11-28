@@ -1,24 +1,44 @@
 #include <stdio.h>
+#include <string.h>
 
-struct Student {
+enum Gender { MALE, FEMALE, OTHER };
+
+struct Person {
     char name[50];
-    int roll_no;
-    float marks;
+    enum Gender gender;
 };
 
 int main() {
-    struct Student s;
+    struct Person p;
+    char input[20];
 
-    printf("Enter student name: ");
-    scanf("%s", s.name);
+    printf("Enter gender (MALE / FEMALE / OTHER): ");
+    scanf("%s", input);
 
-    printf("Enter roll number: ");
-    scanf("%d", &s.roll_no);
+    // Convert string to enum
+    if (strcmp(input, "MALE") == 0)
+        p.gender = MALE;
+    else if (strcmp(input, "FEMALE") == 0)
+        p.gender = FEMALE;
+    else if (strcmp(input, "OTHER") == 0)
+        p.gender = OTHER;
+    else {
+        printf("Invalid Input!\n");
+        return 0;
+    }
 
-    printf("Enter marks: ");
-    scanf("%f", &s.marks);
-
-    printf("Name: %s | Roll: %d | Marks: %.0f\n", s.name, s.roll_no, s.marks);
+    // Print gender
+    switch (p.gender) {
+        case MALE:
+            printf("Male\n");
+            break;
+        case FEMALE:
+            printf("Female\n");
+            break;
+        case OTHER:
+            printf("Other\n");
+            break;
+    }
 
     return 0;
 }
